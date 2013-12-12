@@ -1,0 +1,80 @@
+package org.codelearn.codelearnlistexample;
+
+import java.util.Collections;
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+
+public class ListViewWithBaseAdapter extends Activity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list_view_with_simple_adapter);
+        
+     
+        ArrayAdapter<String> codeLearnArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, codeLearnChapters);
+        
+        ListView codeLearnLessons = (ListView)findViewById(R.id.listView1);
+        codeLearnLessons.setAdapter(codeLearnArrayAdapter);
+    }
+
+
+    public class CodeLearnAdapter extends BaseAdapter {
+
+        private List<BananaPhone> bananaPhones = Collections.emptyList();
+
+        private final Context context;
+
+        // the context is needed to inflate views in getView()
+        public BananaPhoneAdapter(Context context) {
+            this.context = context;
+        }
+
+        public void updateBananas(List<BananaPhone> bananaPhones) {
+            this.bananaPhones = bananaPhones;
+            notifyDataSetChanged();
+        }
+
+        @Override
+        public int getCount() {
+            return bananaPhones.size();
+        }
+
+        // getItem(int) in Adapter returns Object but we can override
+        // it to BananaPhone thanks to Java return type covariance
+        @Override
+        public BananaPhone getItem(int position) {
+            return bananaPhones.get(position);
+        }
+
+        // getItemId() is often useless, I think this should be the default
+        // implementation in BaseAdapter
+        @Override
+        public long getItemId(int position) {
+            return position;
+        }
+
+        @Override
+        public View getView(int position, View convertView, ViewGroup parent) {
+          // Let's look at that later
+        }
+
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.list_view_with_simple_adapter, menu);
+        return true;
+    }
+    
+}

@@ -1,0 +1,75 @@
+package org.codelearn.codelearnlistexample;
+
+import java.util.Collections;
+import java.util.List;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+
+public class ListViewWithBaseAdapter extends Activity {
+
+	private class codeLeanChapter {
+		String chapterName;
+		String chapterDescription;
+	}
+	
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_list_view_with_simple_adapter);
+        
+     
+        ArrayAdapter<String> codeLearnArrayAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, codeLearnChapters);
+        
+        ListView codeLearnLessons = (ListView)findViewById(R.id.listView1);
+        codeLearnLessons.setAdapter(codeLearnArrayAdapter);
+    }
+
+
+    public class CodeLearnAdapter extends BaseAdapter {
+
+		@Override
+		public int getCount() {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public Object getItem(int arg0) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+		@Override
+		public long getItemId(int arg0) {
+			// TODO Auto-generated method stub
+			return 0;
+		}
+
+		@Override
+		public View getView(int arg0, View arg1, ViewGroup arg2) {
+			// TODO Auto-generated method stub
+			return null;
+		}
+
+    }
+    
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.list_view_with_simple_adapter, menu);
+        return true;
+    }
+    
+    public List<CcodeLeanChapter> dataForList()
+    {
+    	
+    }
+}
