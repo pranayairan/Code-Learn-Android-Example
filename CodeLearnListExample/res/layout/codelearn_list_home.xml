@@ -16,6 +16,14 @@
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="BaseAdapter List" />
+        android:text="BaseAdapter List" 
+         android:layout_marginBottom="20dp"/>
 
+    
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ListActivity" />
+    
 </LinearLayout>

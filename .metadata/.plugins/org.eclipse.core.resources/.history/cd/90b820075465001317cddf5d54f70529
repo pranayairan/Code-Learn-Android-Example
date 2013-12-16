@@ -1,0 +1,76 @@
+package com.apigee.feedbacklee;
+
+import android.app.Activity;
+import android.app.Dialog;
+import android.os.Bundle;
+import android.text.TextUtils;
+import android.view.Menu;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.widget.EditText;
+
+import com.apigee.feedback_lee.R;
+import com.apigee.sdk.ApigeeClient;
+
+public class MainActivity extends Activity {
+
+	private ApigeeClient apigeeClient;
+
+	@Override
+	protected void onCreate(Bundle savedInstanceState) {
+		super.onCreate(savedInstanceState);
+		setContentView(R.layout.activity_main);
+	}
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+
+		getMenuInflater().inflate(R.menu.main, menu);
+
+		apigeeClient = new ApigeeClient(Constants.ORGNAME, Constants.APPNAME, this.getBaseContext());
+		FeedbackApplication.setApigeeClient(apigeeClient);
+
+		setupFeedback();
+		findViewById(R.id.imageView1).setOnClickListener(showFeedbackDialog());
+
+		return true;
+	}
+
+	private OnClickListener showFeedbackDialog() {
+
+		return new OnClickListener() {
+
+			@Override
+			public void onClick(View arg0) {
+
+				final Dialog dialog = new Dialog(MainActivity.this);
+				dialog.setContentView(R.layout.dialog_feedback);
+				dialog.setTitle("Apigee Inapp feedback");
+
+				dialog.findViewById(R.id.button1).setOnClickListener(new OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						EditText text = (EditText) dialog.findViewById(R.id.editText1);
+						if (!TextUtils.isEmpty(text.getText())) {
+
+							ApigeeUtils apiUtils = new ApigeeUtils(apigeeClient);
+							apiUtils.createFeedback(new FeedbackDO(text.getText().toString(), "3"));
+							dialog.dismiss();
+						}
+					}
+				});
+				dialog.show();
+
+			}
+		};
+	}
+
+	public void setupFeedback() {
+		ApigeeUtils apiUtils = new ApigeeUtils(apigeeClient);
+		apiUtils.createUser(AndroidUtils.GetDeviceOwnerInfo(this, false), null);
+		apiUtils.authAppUser();
+		GoogleUtils gUtils = new GoogleUtils(this);
+		gUtils.registerGCM();
+	}
+}

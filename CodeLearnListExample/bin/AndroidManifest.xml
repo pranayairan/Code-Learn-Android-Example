@@ -25,6 +25,7 @@
         
         <activity android:name="org.codelearn.codelearnlistexample.ListViewWithBaseAdapter"/>
         <activity android:name="org.codelearn.codelearnlistexample.ListViewWithSimpleAdapter" ></activity>
+        <activity android:name="org.codelearn.codelearnlistexample.ListViewWithListActivity"/>
     </application>
 
 </manifest>

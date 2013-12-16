@@ -21,6 +21,7 @@ public class ListViewHome extends Activity{
 		
 		Button simpleAdapter = (Button)findViewById(R.id.button1);
 		Button baseAdapter = (Button)findViewById(R.id.button2);
+		Button listAct = (Button)findViewById(R.id.button3);
 		
 		simpleAdapter.setOnClickListener(new OnClickListener() {
 			
@@ -38,6 +39,16 @@ public class ListViewHome extends Activity{
 			@Override
 			public void onClick(View v) {
 				Intent base = new Intent(ListViewHome.this,ListViewWithBaseAdapter.class);
+				startActivity(base);
+				
+			}
+		});
+		
+		listAct.setOnClickListener(new OnClickListener() {
+			
+			@Override
+			public void onClick(View v) {
+				Intent base = new Intent(ListViewHome.this,ListViewWithListActivity.class);
 				startActivity(base);
 				
 			}
